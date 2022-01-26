@@ -252,9 +252,9 @@ QMap<QString, QList<QString>> MainWindow::geneticEvolution(QMap<QString, QList<Q
         conflictResolution(resultGeneList);
         //第五步将冲突消除后的个体再次进行分割，按班级进行分配准备进入下一次的进化
         individualMap = transformIndividual(conflictResolution(resultGeneList));
-        if(i == 25) this->ui->progressBar->setValue(50);
-        if(i == 50) this->ui->progressBar->setValue(70);
-        if(i == 75) this->ui->progressBar->setValue(80);
+        if(i == generation / 4) this->ui->progressBar->setValue(50);
+        if(i == generation / 2) this->ui->progressBar->setValue(70);
+        if(i == generation / 4 * 3) this->ui->progressBar->setValue(80);
     }
     return individualMap;
 }
@@ -267,6 +267,7 @@ QMap<QString, QList<QString>> MainWindow::geneticEvolution(QMap<QString, QList<Q
 QMap<QString, QList<QString>> MainWindow::hybridization(QMap<QString, QList<QString>> individualMap){
     QMap<QString, QList<QString>>::iterator iter = individualMap.begin();
     double sum = 0;
+    static int times = 0;
     while (iter != individualMap.end()) {
         QString classNo = iter.key();
         QList<QString> individualList = iter.value();
@@ -285,7 +286,7 @@ QMap<QString, QList<QString>> MainWindow::hybridization(QMap<QString, QList<QStr
         }
         iter++;
     }
-    qDebug() << "适应度：" << sum;
+    qDebug() << "第" << ++times << "次适应度：" << sum;
     return individualMap;
 }
 
@@ -300,7 +301,7 @@ QList<QString> MainWindow::selectiveGene(QList<QString> individualList){
         int secondTemp = min + (rand() % (max + 1 - min));//选取第二个随机数
         QString firstGene = individualList[firstTemp];//获取第一条基因
         QString secondGene = individualList[secondTemp];//获取第二条基因
-        //判断选择的两个随机数为否相同，确保不会选择同一条基因进行交叉操作
+        //判断选择的两个随机数是否相同，确保不会选择同一条基因进行交叉操作
         if (firstTemp == secondTemp) {
             flag = false;
         } else if (ClassScheduleTool::cutGene(ConstantInfo::IS_FIX, firstGene) == "2" ||
