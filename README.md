@@ -70,7 +70,7 @@ https://github.com/BeGifted/Course-Scheduling-System
 
 流程图：
 
-<img src="\flowchart.png" alt="flowchart" style="zoom: 50%;" />
+<img src="flowchart.png" alt="flowchart" style="zoom: 50%;" />
 
 ----
 
@@ -82,7 +82,7 @@ STEP：
    List<String> classTaskList
    ```
 
-   <img src="\classTask.png" style="zoom:80%;" />
+   <img src="classTask.png" style="zoom:80%;" />
 
 2. 将开课任务进行编码；
 
@@ -128,7 +128,7 @@ STEP：
 
    离散度是指同一课程在指定班级的分散程度；对位于同一个体中的相同课程的时间差大小，赋予不同的期望值。
 
-   <img src="\expect.png" style="zoom:80%;" />
+   <img src="expect.png" style="zoom:80%;" />
 
    6.3 特定课程期望值计算：
 
